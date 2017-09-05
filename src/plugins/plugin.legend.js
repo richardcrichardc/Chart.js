@@ -208,6 +208,9 @@ module.exports = function(Chart) {
 				minSize.width = me.maxWidth; // fill all the width
 				minSize.height = display ? 10 : 0;
 			} else {
+
+
+
 				minSize.width = display ? 10 : 0;
 				minSize.height = me.maxHeight; // fill all the height
 			}
@@ -384,6 +387,8 @@ module.exports = function(Chart) {
 					}
 				};
 
+				var itemHeight = fontSize + labelOpts.padding;
+
 				// Horizontal
 				var isHorizontal = me.isHorizontal();
 				if (isHorizontal) {
@@ -398,9 +403,10 @@ module.exports = function(Chart) {
 						y: me.top + labelOpts.padding,
 						line: 0
 					};
+					// vertically center - this will break if there are too many legendItems
+					cursor.y += (me.height - (itemHeight * me.legendItems.length)) / 2;
 				}
 
-				var itemHeight = fontSize + labelOpts.padding;
 				helpers.each(me.legendItems, function(legendItem, i) {
 					var textWidth = ctx.measureText(legendItem.text).width,
 						width = boxWidth + (fontSize / 2) + textWidth,
